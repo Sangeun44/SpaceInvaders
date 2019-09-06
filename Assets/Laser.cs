@@ -17,13 +17,17 @@ public class Laser : MonoBehaviour
         //allow movement left to right
         float speed = 10.0f;
         float step = speed * Time.deltaTime; //slow it down
-        transform.Translate(Input.GetAxis("Horizontal") * step, 0, 0); 
+        transform.Translate(Input.GetAxis("Horizontal") * step, 0, 0);
 
         //limit movement left to right
-        if (transform.position.x <= -15.5f)
-            transform.position = new Vector3(-15.5f, transform.position.y, transform.position.z);
-        else if (transform.position.x >= 15.5f)
-            transform.position = new Vector3(15.5f, transform.position.y, transform.position.z);
+        if (transform.position.x <= -20.0f)
+        {
+            transform.position = new Vector3(-20.0f, transform.position.y, transform.position.z);
+        }
+        else if (transform.position.x >= 20.0f)
+        {
+            transform.position = new Vector3(20.0f, transform.position.y, transform.position.z);
+        }
 
         //press space to shoot bullet
         if (Input.GetKeyDown("space"))

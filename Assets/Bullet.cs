@@ -20,45 +20,30 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     { //Physics engine handles movement, empty for now. }
-        float speed = 10.0f;
-        float step = speed * Time.deltaTime; //slow it down
-        transform.Translate(10.0f, 0, 0);
+        //float speed = 10.0f;
+        //float step = speed * Time.deltaTime; //slow it down
+        //transform.Translate(10.0f, 0, 0);
 
-        //limit movement left to right
-        if (transform.position.x <= -15.5f)
-        {
-            transform.position = new Vector3(-15.5f, transform.position.y, transform.position.z);
-        } else if (transform.position.x >= 15.5f) {
-            transform.position = new Vector3(15.5f, transform.position.y, transform.position.z);
-        }
-
-    }
-
-    void FixedUpdate()
-    { //Physics engine handles movement, empty for now. }
-        float speed = 10.0f;
-        float step = speed * Time.deltaTime; //slow it down
-        transform.Translate(10.0f, 0, 0);
-
-        //limit movement left to right
-        if (transform.position.x <= -15.5f)
-        {
-            transform.position = new Vector3(-15.5f, transform.position.y, transform.position.z);
-        }
-        else if (transform.position.x >= 15.5f)
-        {
-            transform.position = new Vector3(15.5f, transform.position.y, transform.position.z);
-        }
+        ////limit movement left to right
+        //if (transform.position.x <= -15.5f)
+        //{
+        //    transform.position = new Vector3(-15.5f, transform.position.y, transform.position.z);
+        //} else if (transform.position.x >= 15.5f) {
+        //    transform.position = new Vector3(15.5f, transform.position.y, transform.position.z);
+        //}
 
     }
 
     void OnCollisionEnter(Collision collision)
     {
+        _ = collision.collider;
+
         //Check for a match with the specified name on any GameObject that collides with your GameObject
         if (collision.gameObject.name == "Alien1")
         {
             //If the GameObject's name matches the one you suggest, output this message in the console
-            Debug.Log("Do something here");
+            Debug.Log("Destory the alien!");
+
         }
 
         //Check for a match with the specific tag on any GameObject that collides with your GameObject
