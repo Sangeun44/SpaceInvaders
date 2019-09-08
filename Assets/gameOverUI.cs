@@ -21,9 +21,7 @@ public class gameOverUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (globalObj.livesRemaining == 0) {
-            gameOverTXT.enabled = true;
-        }
+        gameOverTXT.enabled |= (globalObj.livesRemaining == 0);
     }
 
 }

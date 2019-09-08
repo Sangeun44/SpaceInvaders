@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
 		globalObj = g.GetComponent<Global>();
 
 		// travel straight in the z-axis
-		thrust.z = 700.0f;
+		thrust.z = 1000.0f;
         // do not passively decelerate
         GetComponent<Rigidbody>().drag = 0;
         // apply thrust once, no need to apply it again since

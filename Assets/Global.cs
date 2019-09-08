@@ -10,9 +10,9 @@ public class Global : MonoBehaviour
     public int livesRemaining;
     public int level=0;
 
-    public bool playerDied = false;
-    public bool gameOver = false;
-    public bool playerWon = true;
+    public bool playerDied;
+    public bool gameOver;
+    public bool playerWon;
 
     public int direction = -1;
 
@@ -20,14 +20,20 @@ public class Global : MonoBehaviour
     public GameObject Laser;
     public GameObject Group;
 
+
     // Use this for initialization
     void Start()
     {
         level++;
         livesRemaining = 3;
         score = 0;
+
         //Group.makeGroup();
-        Instantiate(Laser, new Vector3(0, 0, -20), Quaternion.identity);
+        Laser = Instantiate(Laser, new Vector3(0, 0, -20), Quaternion.identity);
+        Group = Instantiate(Group);
+        playerWon = false;
+        playerDied = false;
+        gameOver = false;
     }
 
     // Update is called once per frame
@@ -39,16 +45,19 @@ public class Global : MonoBehaviour
         }
 
         //check if the aliens are all dead
-        Group group = Group.GetComponent<Group>();        
-        if (group.list.Count == 0) {
-            playerWon = true;
+        Group grw = Group.GetComponent<Group>();
+        Debug.Log(grw.list.Count);
+
+        if (grw.list.Count == 0) {
             Debug.Log("alien's are all dead");
+            Debug.Log("game won?");
+            playerWon = true;
         }
 
         // make alien ships that will move at the back row
         int ran = Random.Range(0, 10000);
-        GameObject g = GameObject.Find("AlienShip");
-        if (ran >= 9990 && livesRemaining > 0)
+        //GameObject g = GameObject.Find("AlienShip");
+        if (ran >= 9990 && livesRemaining > 0 && !playerWon && !playerDied)
         {
             Instantiate(AlienShip, new Vector3(40 * direction*-1, 0, 35), Quaternion.identity);
         }
@@ -72,7 +81,7 @@ public class Global : MonoBehaviour
     IEnumerator Respawn(float Count)
     {
         yield return new WaitForSeconds(Count); //Count is the amount of time in seconds that you want to wait.
-        Instantiate(Laser, new Vector3(0, 0, -20), Quaternion.identity);
+        Laser = Instantiate(Laser, new Vector3(0, 0, -20), Quaternion.identity);
         //And here goes your method of resetting the game...
         yield return null;
     }

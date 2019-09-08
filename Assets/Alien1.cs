@@ -83,8 +83,12 @@ public class Alien1 : MonoBehaviour
         //AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
         //Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
         GameObject obj = GameObject.Find("GlobalObject");
-        Global g = obj.GetComponent<Global>();
+        g = obj.GetComponent<Global>();   
         g.score += pointValue;
+
+        GameObject group = GameObject.Find("Group");
+        Group grw = obj.GetComponent<Group>();
         Destroy(gameObject);
+        //grw.list.Remove(gameObject);
     }
 }

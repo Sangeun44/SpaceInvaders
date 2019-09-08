@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class gameWonUI : MonoBehaviour
@@ -20,9 +21,10 @@ public class gameWonUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (globalObj.playerWon)
+        if (globalObj.playerWon && globalObj.livesRemaining > 0)
         {
             gameWonTXT.enabled = true;
+            Debug.Log("game won");
         }
     }
 

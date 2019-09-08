@@ -57,7 +57,6 @@ public class Alien3 : MonoBehaviour
             // instantiate the Bullet
             GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
             // get the Bullet Script Component of the new Bullet instance
-            Bullet b = obj.GetComponent<Bullet>();
         }
     }
 
@@ -67,7 +66,7 @@ public class Alien3 : MonoBehaviour
         // Change the cube color to green.
         //MeshRenderer meshRend = GetComponent<MeshRenderer>();
         //meshRend.material.color = Color.green;
-        Debug.Log(other.name);
+        //Debug.Log(other.name);
         if (other.gameObject.tag == "Bullet")
         {
             Die();
@@ -81,7 +80,7 @@ public class Alien3 : MonoBehaviour
         //AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
         //Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
         GameObject obj = GameObject.Find("GlobalObject");
-        Global g = obj.GetComponent<Global>();
+        g = obj.GetComponent<Global>();
         g.score += pointValue;
         Destroy(gameObject);
     }

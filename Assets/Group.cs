@@ -23,8 +23,10 @@ public class Group : MonoBehaviour
     // This script will simply instantiate the Prefab when the game starts.
     void Start()
     {
+
         GameObject g = GameObject.Find("GlobalObject");
         globalObj = g.GetComponent<Global>();
+        level = globalObj.level;
 
         //make left of the alien group
         for (int i = 0; i < 4; i++) {
@@ -83,6 +85,15 @@ public class Group : MonoBehaviour
                 Destroy(alien);
             }
         }
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i] == null)
+                list.RemoveAt(i);
+        }
+
+        Debug.Log("all aliens: " + list.Count);
+
     }
 }
 

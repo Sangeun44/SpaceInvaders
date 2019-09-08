@@ -18,11 +18,12 @@ public class CameraSwitch : MonoBehaviour
             FirstPersonCam.gameObject.SetActive(camSwitch);
             ThirdPersonCam.gameObject.SetActive(!camSwitch);
         }
+ 
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
 
