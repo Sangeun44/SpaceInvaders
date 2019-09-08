@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Alien1
+  - Alien2
+  - Alien3
+  - Bullet
+  - Attack
+  - Laser
   layers:
   - Default
   - TransparentFX
