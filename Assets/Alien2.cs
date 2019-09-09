@@ -11,6 +11,7 @@ public class Alien2 : MonoBehaviour
     Global g;
     float rightEnd;
     float leftEnd;
+    float num_aliens;
 
     void Start()
     {
@@ -26,8 +27,13 @@ public class Alien2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameObject gp = g.Group;
+        Group grw = gp.GetComponent<Group>();
+        num_aliens = grw.list.Count;
+        //Debug.Log("all aliens: " + num_aliens);
+
         //Physics engine handles movement, empty for now. }
-        float step = speed * Time.deltaTime * direction; //slow it down
+        float step = speed * 40 / num_aliens * Time.deltaTime * direction; //slow it down
         rightEnd += step;
         leftEnd += step;
 
@@ -81,6 +87,12 @@ public class Alien2 : MonoBehaviour
         GameObject obj = GameObject.Find("GlobalObject");
         Global g = obj.GetComponent<Global>();
         g.score += pointValue;
+        GameObject gp = g.Group;
+        Group grw = gp.GetComponent<Group>();
+        int index = grw.list.IndexOf(gameObject);
+        //Debug.Log(grw.list.Count);
+
         Destroy(gameObject);
+        grw.list.RemoveAt(index);
     }
 }

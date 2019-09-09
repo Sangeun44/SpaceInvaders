@@ -26,7 +26,6 @@ public class Laser : MonoBehaviour
             //Debug.Log("The enemy attack reached me");
             AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
             Instantiate(explosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
-
             Destroy(other.gameObject); //delete this bullet
             Die();
         }
@@ -51,19 +50,20 @@ public class Laser : MonoBehaviour
             transform.position = new Vector3(25.0f, transform.position.y, transform.position.z);
         }
 
+        Debug.Log("comeback");
+
         //press space to shoot bullet
         if (Input.GetKeyDown("space"))
         {
             AudioSource.PlayClipAtPoint(pewpew, gameObject.transform.position);
             //Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
-
             //Debug.Log("Fire!");
             Vector3 spawnPos = gameObject.transform.position;
             spawnPos.z += 2.5f;
             // instantiate the Bullet
             GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
             // get the Bullet Script Component of the new Bullet instance
-            Bullet b = obj.GetComponent<Bullet>();
+            //Bullet b = obj.GetComponent<Bullet>();
 
         }
     }
@@ -77,7 +77,19 @@ public class Laser : MonoBehaviour
         g.livesRemaining -= 1;
         g.playerDied = true;
         Destroy(gameObject);
+        //Instantiate(gameObject, new Vector3(0, 0, -20), Quaternion.identity);
+        Debug.Log("died");
+        g.Laser = Instantiate(gameObject, transform.position, Quaternion.identity);
+
     }
 
+    //IEnumerator Respawn()
+    //{
+    //    yield return new WaitForSeconds(3.0f); //Count is the amount of time in seconds that you want to wait.
+    //    GameObject obj = GameObject.Find("GlobalObject");
+    //    Global g = obj.GetComponent<Global>();
 
+    //    g.Laser = Instantiate(gameObject, new Vector3(0, 0, -20), Quaternion.identity);
+    //    //And here goes your method of resetting the game...
+    //}
 }
