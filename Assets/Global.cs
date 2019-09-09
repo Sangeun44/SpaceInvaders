@@ -10,11 +10,11 @@ public class Global : MonoBehaviour
     public int livesRemaining;
     public int level=0;
 
-    public bool playerDied = false;
-    public bool gameOver = false;
-    public bool playerWon = false;
+    public bool playerDied;
+    public bool gameOver;
+    public bool playerWon;
 
-    public int direction = -1;
+    public int direction;
 
     public GameObject AlienShip;
     public GameObject Laser;
@@ -27,7 +27,7 @@ public class Global : MonoBehaviour
         level++;
         livesRemaining = 3;
         score = 0;
-
+        direction = -1;
         Instantiate(Laser, new Vector3(0, 0, -20), Quaternion.identity);
         Group = Instantiate(Group);
         playerWon = false;
@@ -74,7 +74,8 @@ public class Global : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && livesRemaining == 0)
         {
             Debug.Log("Player pressed R");
-            SceneManager.LoadScene(1);
+            gameOver = true;
+            Start();         
         }
 
     }

@@ -13,9 +13,9 @@ public class FirstPersonCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject g = GameObject.Find("GlobalObject");
-        Global globalObj = g.GetComponent<Global>();
-        GameObject player = globalObj.Laser;
+        GameObject player = GameObject.Find("Laser(Clone)");
+        //Global globalObj = g.GetComponent<Global>();
+        //GameObject player = globalObj.Laser;
         //transform.position = Vector3.Lerp(transform.position, player.transform.position, Time.deltaTime);
         transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 2, player.transform.position.z);
     }

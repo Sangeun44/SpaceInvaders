@@ -24,7 +24,21 @@ public class gameOverUI : MonoBehaviour
         if (globalObj.livesRemaining == 0)
         {
             gameOverTXT.enabled = true;
+            StartCoroutine("Restart", 4.0f); //respawn
+
         }
+        else {
+            gameOverTXT.enabled = false;
+        }
+
+
+
     }
 
+    IEnumerator Restart(float Count)
+    {
+        yield return new WaitForSeconds(Count); //Count is the amount of time in seconds that you want to wait.
+        //And here goes your method of resetting the game...
+        yield return null;
+    }
 }

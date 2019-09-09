@@ -278,8 +278,6 @@ GameObject:
   - component: {fileID: 247838086}
   - component: {fileID: 247838088}
   - component: {fileID: 247838087}
-  - component: {fileID: 247838090}
-  - component: {fileID: 247838089}
   - component: {fileID: 247838091}
   m_Layer: 5
   m_Name: hiscore
@@ -349,30 +347,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247838085}
   m_CullTransparentMesh: 0
---- !u!114 &247838089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 247838085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb9b09178917d4ce8a7d2f8e3b643ea0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &247838090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 247838085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb9b09178917d4ce8a7d2f8e3b643ea0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &247838091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,7 +1110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fffdc2aace74da089a0892421aa0ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  Player: {fileID: 793616167876621135, guid: ef3d4d44afe0040b9a2bd78204819852, type: 3}
   FirstPersonCam: {fileID: 2032250602}
   ThirdPersonCam: {fileID: 1025890687}
   TKey: 116

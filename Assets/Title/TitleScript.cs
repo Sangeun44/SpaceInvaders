@@ -13,7 +13,6 @@ public class TitleScript : MonoBehaviour
     {
 		GameObject.Find("Button1").GetComponentInChildren<Text>().text = "Start Game";
 		GameObject.Find("Button2").GetComponentInChildren<Text>().text = "Exit";
-
 	}
 
 	// Update is called once per frame

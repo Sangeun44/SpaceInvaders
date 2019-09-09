@@ -18,7 +18,7 @@ public class HiscoreUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (globalObj.livesRemaining == 0) {
+		if (globalObj.livesRemaining == 0 || globalObj.playerWon) {
 			GameOver();
 		}
     }

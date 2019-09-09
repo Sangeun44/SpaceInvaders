@@ -21,7 +21,7 @@ public class gameWonUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (globalObj.playerWon && globalObj.livesRemaining > 0)
+        if (globalObj.playerWon)
         {
             gameWonTXT.enabled = true;
         }
