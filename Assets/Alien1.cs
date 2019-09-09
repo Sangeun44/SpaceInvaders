@@ -11,6 +11,7 @@ public class Alien1 : MonoBehaviour
 
     public GameObject bullet; // the GameObject to spawn
     Global g;
+    Group grw;
     float rightEnd;
     float leftEnd;
     float num_aliens;
@@ -19,10 +20,8 @@ public class Alien1 : MonoBehaviour
     {
         GameObject obj = GameObject.Find("GlobalObject");
         g = obj.GetComponent<Global>();
-
         GameObject gp = g.Group;
-        Group grw = gp.GetComponent<Group>();
-
+        grw = gp.GetComponent<Group>();
         speed = 1.0f;
         pointValue = 10;
         direction = 1;
@@ -33,8 +32,6 @@ public class Alien1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject gp = g.Group;
-        Group grw = gp.GetComponent<Group>();
         num_aliens = grw.list.Count;
         //Debug.Log("all aliens: " + num_aliens);
 
@@ -65,7 +62,6 @@ public class Alien1 : MonoBehaviour
             // instantiate the Bullet
             GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
             // get the Bullet Script Component of the new Bullet instance
-            Bullet b = obj.GetComponent<Bullet>();
         }
        
     }
@@ -95,11 +91,7 @@ public class Alien1 : MonoBehaviour
         g = obj.GetComponent<Global>();   
         g.score += pointValue;
 
-        GameObject gp = g.Group;
-        Group grw = gp.GetComponent<Group>();
         int index = grw.list.IndexOf(gameObject);
-        //Debug.Log(grw.list.Count);
-
         Destroy(gameObject);
         grw.list.RemoveAt(index);
         //grw.list.Remove(gameObject);

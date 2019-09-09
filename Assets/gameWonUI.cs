@@ -24,7 +24,6 @@ public class gameWonUI : MonoBehaviour
         if (globalObj.playerWon && globalObj.livesRemaining > 0)
         {
             gameWonTXT.enabled = true;
-            Debug.Log("game won");
         }
     }
 

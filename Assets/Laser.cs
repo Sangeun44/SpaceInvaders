@@ -13,6 +13,7 @@ public class Laser : MonoBehaviour
 
     }
 
+    
     public AudioClip deathExplosion;
     public GameObject explosion;
     private void OnTriggerEnter(Collider other)
@@ -32,11 +33,10 @@ public class Laser : MonoBehaviour
     }
 
     public AudioClip pewpew;
-
+    float speed = 15.0f;
     void Update()
     {
         //allow movement left to right
-        float speed = 10.0f;
         float step = speed * Time.deltaTime; //slow it down
         transform.Translate(Input.GetAxis("Horizontal") * step, 0, 0);
 
@@ -79,7 +79,7 @@ public class Laser : MonoBehaviour
         Destroy(gameObject);
         //Instantiate(gameObject, new Vector3(0, 0, -20), Quaternion.identity);
         Debug.Log("died");
-        g.Laser = Instantiate(gameObject, transform.position, Quaternion.identity);
+        //g.Laser = Instantiate(gameObject, transform.position, Quaternion.identity);
 
     }
 

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Alien2 : MonoBehaviour
 {
+
     public int pointValue;
     public int direction;
     float speed;
+
     public GameObject bullet; // the GameObject to spawn
     Global g;
+    Group grw;
     float rightEnd;
     float leftEnd;
     float num_aliens;
@@ -17,8 +20,10 @@ public class Alien2 : MonoBehaviour
     {
         GameObject obj = GameObject.Find("GlobalObject");
         g = obj.GetComponent<Global>();
+        GameObject gp = g.Group;
+        grw = gp.GetComponent<Group>();
         speed = 1.0f;
-        pointValue = 10;
+        pointValue = 20;
         direction = 1;
         rightEnd = 8;
         leftEnd = -10;
@@ -27,8 +32,6 @@ public class Alien2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject gp = g.Group;
-        Group grw = gp.GetComponent<Group>();
         num_aliens = grw.list.Count;
         //Debug.Log("all aliens: " + num_aliens);
 
@@ -53,46 +56,45 @@ public class Alien2 : MonoBehaviour
 
         int ran = Random.Range(0, 10000);
 
-        if (ran >= 9998 && g.livesRemaining > 0)
+        if (ran >= 9997 && g.livesRemaining > 0)
         {
             Vector3 spawnPos = gameObject.transform.position;
             spawnPos.z += 2.5f;
             // instantiate the Bullet
             GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
             // get the Bullet Script Component of the new Bullet instance
-            Bullet b = obj.GetComponent<Bullet>();
         }
+
     }
 
     public AudioClip deathExplosion;
 
     private void OnTriggerEnter(Collider other)
     {
-        //// Change the cube color to green.
+        // Change the cube color to green.
         //MeshRenderer meshRend = GetComponent<MeshRenderer>();
         //meshRend.material.color = Color.green;
-        //Debug.Log(other.name);
         if (other.gameObject.tag == "Bullet")
         {
-            Die();
             AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-            Destroy(other.gameObject); //delete this bullet
+            Destroy(other.gameObject); //delete bullet
+            Die();
         }
     }
 
+    //public GameObject deathExplosion;
+    //public AudioClip deathKnell;
     public void Die()
     {
         //AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
         //Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
         GameObject obj = GameObject.Find("GlobalObject");
-        Global g = obj.GetComponent<Global>();
+        g = obj.GetComponent<Global>();
         g.score += pointValue;
-        GameObject gp = g.Group;
-        Group grw = gp.GetComponent<Group>();
-        int index = grw.list.IndexOf(gameObject);
-        //Debug.Log(grw.list.Count);
 
+        int index = grw.list.IndexOf(gameObject);
         Destroy(gameObject);
         grw.list.RemoveAt(index);
+        //grw.list.Remove(gameObject);
     }
 }

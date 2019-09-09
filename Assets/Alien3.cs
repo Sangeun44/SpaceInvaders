@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Alien3 : MonoBehaviour
 {
+
     public int pointValue;
     public int direction;
     float speed;
+
     public GameObject bullet; // the GameObject to spawn
     Global g;
+    Group grw;
     float rightEnd;
     float leftEnd;
     float num_aliens;
@@ -17,8 +20,10 @@ public class Alien3 : MonoBehaviour
     {
         GameObject obj = GameObject.Find("GlobalObject");
         g = obj.GetComponent<Global>();
+        GameObject gp = g.Group;
+        grw = gp.GetComponent<Group>();
         speed = 1.0f;
-        pointValue = 10;
+        pointValue = 30;
         direction = 1;
         rightEnd = 8;
         leftEnd = -10;
@@ -27,8 +32,6 @@ public class Alien3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject gp = g.Group;
-        Group grw = gp.GetComponent<Group>();
         num_aliens = grw.list.Count;
         //Debug.Log("all aliens: " + num_aliens);
 
@@ -42,45 +45,45 @@ public class Alien3 : MonoBehaviour
         //limit movement left to right
         if (leftEnd <= -15.0f)
         {
-            //Debug.Log("Reached Left");
             direction = 1;
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1.0f);
         }
         else if (rightEnd >= 15.0f)
         {
-            //Debug.Log("Reached Right");
             direction = -1;
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1.0f);
         }
 
         int ran = Random.Range(0, 10000);
 
-        if (ran >= 9999 && g.livesRemaining > 0)
+        if (ran >= 9997 && g.livesRemaining > 0)
         {
-            //Debug.Log("Fire!");
             Vector3 spawnPos = gameObject.transform.position;
             spawnPos.z += 2.5f;
             // instantiate the Bullet
             GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
             // get the Bullet Script Component of the new Bullet instance
         }
+
     }
 
     public AudioClip deathExplosion;
+
     private void OnTriggerEnter(Collider other)
     {
         // Change the cube color to green.
         //MeshRenderer meshRend = GetComponent<MeshRenderer>();
         //meshRend.material.color = Color.green;
-        //Debug.Log(other.name);
         if (other.gameObject.tag == "Bullet")
         {
-            Die();
             AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-            Destroy(other.gameObject); //delete this bullet
+            Destroy(other.gameObject); //delete bullet
+            Die();
         }
     }
 
+    //public GameObject deathExplosion;
+    //public AudioClip deathKnell;
     public void Die()
     {
         //AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
@@ -88,12 +91,10 @@ public class Alien3 : MonoBehaviour
         GameObject obj = GameObject.Find("GlobalObject");
         g = obj.GetComponent<Global>();
         g.score += pointValue;
-        GameObject gp = g.Group;
-        Group grw = gp.GetComponent<Group>();
-        int index = grw.list.IndexOf(gameObject);
-        //Debug.Log(grw.list.Count);
 
+        int index = grw.list.IndexOf(gameObject);
         Destroy(gameObject);
         grw.list.RemoveAt(index);
+        //grw.list.Remove(gameObject);
     }
 }

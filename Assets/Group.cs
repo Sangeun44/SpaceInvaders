@@ -88,12 +88,6 @@ public class Group : MonoBehaviour
             }
         }
 
-        //for (int i = 0; i < list.Count; i++)
-        //{
-        //    if (list[i] == null)
-        //        list.RemoveAt(i);
-        //}
-
         //Debug.Log("all aliens: " + list.Count);
 
     }
