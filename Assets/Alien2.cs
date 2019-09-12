@@ -93,6 +93,7 @@ public class Alien2 : MonoBehaviour
         g.score += pointValue;
 
         int index = grw.list.IndexOf(gameObject);
+        Debug.Log("Alien2: " + index);
         Destroy(gameObject);
         grw.list.RemoveAt(index);
         //grw.list.Remove(gameObject);

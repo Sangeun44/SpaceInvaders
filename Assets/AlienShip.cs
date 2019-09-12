@@ -43,8 +43,7 @@ public class AlienShip : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Change the cube color to green.
-        //MeshRenderer meshRend = GetComponent<MeshRenderer>();
-        //meshRend.material.color = Color.green;
+
         if (other.gameObject.tag == "Bullet")
         {
             AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);

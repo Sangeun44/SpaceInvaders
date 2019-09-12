@@ -28,9 +28,7 @@ public class Attack : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Change the cube color to green.
-        //MeshRenderer meshRend = GetComponent<MeshRenderer>();
-        //meshRend.material.color = Color.green;
-        //Debug.Log(other.name);
+
         if (other.gameObject.tag == "Bullet")
         {
             //AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);

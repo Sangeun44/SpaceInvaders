@@ -6,12 +6,15 @@ public class Bullet : MonoBehaviour
 {
     public Vector3 thrust;
 	Global globalObj;
+    public bool alive;
+
 	// Use this for initialization
 	void Start()
     {
 		GameObject g = GameObject.Find("GlobalObject");
 		globalObj = g.GetComponent<Global>();
 
+        alive = true;
 		// travel straight in the z-axis
 		thrust.z = 1000.0f;
         // do not passively decelerate
@@ -36,9 +39,10 @@ public class Bullet : MonoBehaviour
         //Debug.Log(other.name);
         if (other.gameObject.tag == "Attack")
         {
+            alive = false;
             //AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-            Destroy(other.gameObject); //delete bullet
-            Destroy(gameObject); //delete this alien
+            //Destroy(other.gameObject); //delete bullet
+            //Destroy(gameObject); //delete the bullet
         }
     }
 

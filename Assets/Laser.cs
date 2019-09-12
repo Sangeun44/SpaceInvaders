@@ -7,13 +7,24 @@ public class Laser : MonoBehaviour
     public GameObject bullet; // the GameObject to spawn
     Global globalObj;
 
+    public bool alive;
+
     // Use this for initialization
     void Start()
     {
-
+        alive = true;
     }
 
-    
+    void OnCollisionEnter(Collision collision)
+    {
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            Debug.DrawRay(contact.point, contact.normal, Color.white);
+        }
+        if (collision.relativeVelocity.magnitude > 2)
+            audioSource.Play();
+    }
+
     public AudioClip deathExplosion;
     public GameObject explosion;
     private void OnTriggerEnter(Collider other)
@@ -76,20 +87,9 @@ public class Laser : MonoBehaviour
         Global g = obj.GetComponent<Global>();
         g.livesRemaining -= 1;
         g.playerDied = true;
-        Destroy(gameObject);
-        //Instantiate(gameObject, new Vector3(0, 0, -20), Quaternion.identity);
+        alive = true;
+        //Destroy(gameObject);
         Debug.Log("died");
-        //g.Laser = Instantiate(gameObject, transform.position, Quaternion.identity);
-
     }
 
-    //IEnumerator Respawn()
-    //{
-    //    yield return new WaitForSeconds(3.0f); //Count is the amount of time in seconds that you want to wait.
-    //    GameObject obj = GameObject.Find("GlobalObject");
-    //    Global g = obj.GetComponent<Global>();
-
-    //    g.Laser = Instantiate(gameObject, new Vector3(0, 0, -20), Quaternion.identity);
-    //    //And here goes your method of resetting the game...
-    //}
 }

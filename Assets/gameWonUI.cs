@@ -24,7 +24,15 @@ public class gameWonUI : MonoBehaviour
         if (globalObj.playerWon)
         {
             gameWonTXT.enabled = true;
+            StartCoroutine("turnOff", 3.0f); //respawn
         }
     }
 
+    IEnumerator turnOff(float Count)
+    {
+        yield return new WaitForSeconds(Count); //Count is the amount of time in seconds that you want to wait.
+                                                //And here goes your method of resetting the game...
+        gameWonTXT.enabled = false;
+        yield return null;
+    }
 }

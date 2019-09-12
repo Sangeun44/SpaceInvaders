@@ -28,6 +28,7 @@ public class Group : MonoBehaviour
         globalObj = g.GetComponent<Global>();
         level = globalObj.level;
 
+        Debug.Log("level:" + level);
         //make left of the alien group
         for (int i = 0; i < 4; i++) {
             //first row left
@@ -51,6 +52,7 @@ public class Group : MonoBehaviour
             list.Add(alien4);
             list.Add(alien5);
         }
+
         //make right of the alien group
         for (int i = 0; i < 5; i++)
         {

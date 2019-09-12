@@ -94,6 +94,7 @@ public class Alien3 : MonoBehaviour
 
         int index = grw.list.IndexOf(gameObject);
         Destroy(gameObject);
+        Debug.Log("Alien3: " + index);
         grw.list.RemoveAt(index);
         //grw.list.Remove(gameObject);
     }

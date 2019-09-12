@@ -16,8 +16,11 @@ public class Alien1 : MonoBehaviour
     float leftEnd;
     float num_aliens;
 
+    public bool alive;
+
     void Start()
     {
+        alive = true;
         GameObject obj = GameObject.Find("GlobalObject");
         g = obj.GetComponent<Global>();
         GameObject gp = g.Group;
@@ -35,7 +38,6 @@ public class Alien1 : MonoBehaviour
         num_aliens = grw.list.Count;
         //Debug.Log("all aliens: " + num_aliens);
 
-        //Physics engine handles movement, empty for now. }
         float step = speed *40/num_aliens * Time.deltaTime * direction; //slow it down
         rightEnd += step;
         leftEnd += step;
@@ -67,7 +69,6 @@ public class Alien1 : MonoBehaviour
     }
 
     public AudioClip deathExplosion;
-
     private void OnTriggerEnter(Collider other)
     {
         // Change the cube color to green.
@@ -76,13 +77,23 @@ public class Alien1 : MonoBehaviour
         if (other.gameObject.tag == "Bullet")
         {
             AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-            Destroy(other.gameObject); //delete bullet
-            Die();
+            //Destroy(other.gameObject); //delete bullet
+            if (alive)
+            {
+                Die();
+            }
         }
     }
 
-    //public GameObject deathExplosion;
-    //public AudioClip deathKnell;
+    void OnCollisionEnter(Collision collision)
+    {
+        ContactPoint contact = collision.contacts[0];
+        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        Vector3 pos = contact.point;
+        //Instantiate(explosionPrefab, pos, rot);
+        //Destroy(gameObject);
+    }
+
     public void Die()
     {
         //AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
@@ -90,10 +101,9 @@ public class Alien1 : MonoBehaviour
         GameObject obj = GameObject.Find("GlobalObject");
         g = obj.GetComponent<Global>();   
         g.score += pointValue;
-
+        alive = false;
         int index = grw.list.IndexOf(gameObject);
-        Destroy(gameObject);
+        Debug.Log("Alien1: " + index);
         grw.list.RemoveAt(index);
-        //grw.list.Remove(gameObject);
     }
 }
