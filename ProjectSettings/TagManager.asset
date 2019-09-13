@@ -24,10 +24,10 @@ TagManager:
   - Attack
   - Dead Attack
   - Player
-  - 
-  - 
-  - 
-  - 
+  - Life
+  - Bullets
+  - Dead Aliens
+  - Dead Bullets
   - 
   - 
   - 

@@ -15,14 +15,18 @@ public class Alien2 : MonoBehaviour
     float rightEnd;
     float leftEnd;
     float num_aliens;
+    GameObject obj;
+    GameObject gp;
 
     public bool alive;
 
     void Start()
     {
-        GameObject obj = GameObject.Find("GlobalObject");
+        //up speed
+
+        obj = GameObject.Find("GlobalObject");
         g = obj.GetComponent<Global>();
-        GameObject gp = g.Group;
+        gp = g.Group;
         grw = gp.GetComponent<Group>();
         speed = 1.0f;
         pointValue = 20;
@@ -30,7 +34,12 @@ public class Alien2 : MonoBehaviour
         rightEnd = 8;
         leftEnd = -10;
         alive = true;
+        speed *= g.level;
+
+        //ignore
         Physics.IgnoreLayerCollision(9, 8);
+        Physics.IgnoreLayerCollision(8, 15);
+        Physics.IgnoreLayerCollision(8, 14);
 
 
     }
@@ -41,7 +50,6 @@ public class Alien2 : MonoBehaviour
         if (alive)
         {
             num_aliens = grw.list.Count;
-
             float step = speed * 40 / num_aliens * Time.deltaTime * direction; //slow it down
             rightEnd += step;
             leftEnd += step;
@@ -67,7 +75,7 @@ public class Alien2 : MonoBehaviour
                 Vector3 spawnPos = gameObject.transform.position;
                 spawnPos.y -= 2.5f;
                 // instantiate the Bullet
-                GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
+                Instantiate(bullet, spawnPos, Quaternion.identity);
                 // get the Bullet Script Component of the new Bullet instance
             }
         }
@@ -86,9 +94,7 @@ public class Alien2 : MonoBehaviour
             {
                 Die();
                 AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-
-                MeshRenderer meshRend = GetComponent<MeshRenderer>();
-                meshRend.material.color = Color.red;
+                gameObject.layer = 14;
 
                 this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 this.gameObject.GetComponent<Rigidbody>().useGravity = true;
@@ -109,8 +115,6 @@ public class Alien2 : MonoBehaviour
     {
         //AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
         //Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
-        GameObject obj = GameObject.Find("GlobalObject");
-        g = obj.GetComponent<Global>();
         g.score += pointValue;
         alive = false;
         int index = grw.list.IndexOf(gameObject);

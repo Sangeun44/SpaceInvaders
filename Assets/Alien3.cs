@@ -15,22 +15,32 @@ public class Alien3 : MonoBehaviour
     float rightEnd;
     float leftEnd;
     float num_aliens;
+    GameObject obj;
+    GameObject gp;
 
     public bool alive;
 
     void Start()
     {
-        alive = true;
-        GameObject obj = GameObject.Find("GlobalObject");
+        //up speed
+
+        obj = GameObject.Find("GlobalObject");
         g = obj.GetComponent<Global>();
-        GameObject gp = g.Group;
+        gp = g.Group;
         grw = gp.GetComponent<Group>();
         speed = 1.0f;
         pointValue = 30;
         direction = 1;
         rightEnd = 8;
         leftEnd = -10;
+        alive = true;
+        speed *= g.level;
+
+        //ignore
         Physics.IgnoreLayerCollision(9, 8);
+        Physics.IgnoreLayerCollision(8, 15);
+        Physics.IgnoreLayerCollision(8, 14);
+
 
     }
 
@@ -66,8 +76,7 @@ public class Alien3 : MonoBehaviour
                 Vector3 spawnPos = gameObject.transform.position;
                 spawnPos.y -= 2.5f;
                 // instantiate the Bullet
-                GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
-                // get the Bullet Script Component of the new Bullet instance
+                Instantiate(bullet, spawnPos, Quaternion.identity);
             }
         }
 
@@ -86,16 +95,11 @@ public class Alien3 : MonoBehaviour
                 Die();
                 AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
 
-                MeshRenderer meshRend = GetComponent<MeshRenderer>();
-                meshRend.material.color = Color.red;
+                gameObject.layer = 14;
 
                 this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 this.gameObject.GetComponent<Rigidbody>().useGravity = true;
                 this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -500);
-                if (collision.collider.gameObject.GetComponent<Bullet>().alive)
-                {
-                  
-                }
             }
         }
        
@@ -107,7 +111,7 @@ public class Alien3 : MonoBehaviour
     {
         //AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
         //Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
-        GameObject obj = GameObject.Find("GlobalObject");
+        obj = GameObject.Find("GlobalObject");
         g = obj.GetComponent<Global>();
         g.score += pointValue;
         alive = false;

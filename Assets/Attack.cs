@@ -37,6 +37,8 @@ public class Attack : MonoBehaviour
 
         if(alive)
         {
+            MeshRenderer meshRend = GetComponent<MeshRenderer>();
+            meshRend.material.color = Color.gray;
             alive = false;
             this.gameObject.GetComponent<Rigidbody>().useGravity = true;
             this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
@@ -45,15 +47,12 @@ public class Attack : MonoBehaviour
             if (collision.collider.gameObject.tag == "Bullet")
             {
                 gameObject.layer = 10;
-                MeshRenderer meshRend = GetComponent<MeshRenderer>();
-                meshRend.material.color = Color.gray;
             }
 
             if(collision.collider.gameObject.tag == "Laser")
             {
                 gameObject.layer = 10;
-                MeshRenderer meshRend = GetComponent<MeshRenderer>();
-                meshRend.material.color = Color.gray;
+ 
                 AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
                 collision.collider.gameObject.GetComponent<Laser>().Die();
             }
@@ -61,8 +60,7 @@ public class Attack : MonoBehaviour
             if (collision.collider.gameObject.tag == "Floor")
             {
                 gameObject.layer = 10;
-                MeshRenderer meshRend = GetComponent<MeshRenderer>();
-                meshRend.material.color = Color.gray;
+     
             }
         }
 

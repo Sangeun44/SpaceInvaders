@@ -7,10 +7,12 @@ public class AlienShip : MonoBehaviour
     public int pointValue;
     Global globalObj;
     float speed = 10.0f;
+    public bool alive;
     int direction; 
     // Start is called before the first frame update
     void Start()
     {
+        alive = true;
         GameObject g = GameObject.Find("GlobalObject");
         globalObj = g.GetComponent<Global>();
 
@@ -40,22 +42,26 @@ public class AlienShip : MonoBehaviour
     }
 
     public AudioClip deathExplosion;
-    private void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
-        // Change the cube color to green.
-
-        if (other.gameObject.tag == "Bullet")
+        Debug.Log("AlienShip collision");
+        if (alive)
         {
-            AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-            Destroy(other.gameObject); //delete bullet
-            Die();
+            if (collision.collider.gameObject.tag == "Bullet")
+            {
+                Die();
+                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -500);
+            }
         }
+
     }
 
     public void Die()
     {
-        //AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
-        //Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
+        gameObject.layer = 14;
+        AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
         GameObject obj = GameObject.Find("GlobalObject");
         Global g = obj.GetComponent<Global>();
         g.score += pointValue;

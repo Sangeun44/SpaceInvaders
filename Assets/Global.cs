@@ -20,6 +20,7 @@ public class Global : MonoBehaviour
     public GameObject AlienShip;
     public GameObject Laser;
     public GameObject Group;
+    public GameObject Life;
 
 
     // Use this for initialization
@@ -71,6 +72,13 @@ public class Global : MonoBehaviour
         if (ran >= 9990 && livesRemaining > 0 && !playerWon)
         {
             Instantiate(AlienShip, new Vector3(40 * direction*-1, 35, 0), Quaternion.identity);
+        }
+
+        int random = Random.Range(0, 10000);
+        if (random >= 9990 && livesRemaining > 0 && !playerWon)
+        {
+            int random2 = Random.Range(-20, 20);
+            Instantiate(Life, new Vector3(random2, 30, 0), Quaternion.identity);
         }
 
         if (playerDied && livesRemaining > 0)

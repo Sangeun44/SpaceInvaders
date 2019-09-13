@@ -81,15 +81,25 @@ public class Laser : MonoBehaviour
                     Die();
                     //AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
                     //Instantiate(explosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
-
-                    this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                    this.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                    this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -50);
                 }
                 else {
                     Debug.Log("alive");
                 }
-               
+
+            }
+            if (collision.collider.gameObject.tag == "Alien1" || (collision.collider.gameObject.tag == "Alien2") || (collision.collider.gameObject.tag == "Alien3"))
+            { 
+                if (collision.collider.gameObject.layer != 14)
+                {
+                    Die();
+                    GameObject obj = GameObject.Find("GlobalObject");
+                    Global g = obj.GetComponent<Global>();
+                    g.gameOver = true;
+                }
+                else
+                {
+                    Debug.Log("not alive");
+                }        
             }
         }
        

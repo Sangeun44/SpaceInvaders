@@ -20,6 +20,8 @@ public class Group : MonoBehaviour
     public float speed = 2.0f;
     float rightEnd;
     float leftEnd;
+
+    float frontEnd;
     // This script will simply instantiate the Prefab when the game starts.
     void Start()
     {
@@ -27,7 +29,6 @@ public class Group : MonoBehaviour
         GameObject g = GameObject.Find("GlobalObject");
         globalObj = g.GetComponent<Global>();
         level = globalObj.level;
-
         Debug.Log("level:" + level);
         //make left of the alien group
         for (int i = 0; i < 4; i++) {
@@ -77,6 +78,7 @@ public class Group : MonoBehaviour
             list.Add(alien4);
             list.Add(alien5);
         }
+
 
     }
 

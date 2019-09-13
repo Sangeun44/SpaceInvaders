@@ -22,6 +22,9 @@ public class Bullet : MonoBehaviour
         GetComponent<Rigidbody>().drag = 0;
         // apply thrust once, no need to apply it again since it will not decelerate
         GetComponent<Rigidbody>().AddRelativeForce(thrust);
+        Physics.IgnoreLayerCollision(13, 14);
+        Physics.IgnoreLayerCollision(13, 15);
+
     }
 
     // Update is called once per frame
@@ -37,12 +40,25 @@ public class Bullet : MonoBehaviour
             if (collision.collider.gameObject.tag == "Alien1" || collision.collider.gameObject.tag == "Alien2" || collision.collider.gameObject.tag == "Alien3")
             {
                 alive = false;
+                gameObject.layer = 15;
                 MeshRenderer meshRend = GetComponent<MeshRenderer>();
                 meshRend.material.color = Color.gray;
                 this.gameObject.GetComponent<Rigidbody>().useGravity = true;
                 this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, -2, 0);
             }
+
+            if (collision.collider.gameObject.tag == "Attack")
+            {
+                alive = false;
+                gameObject.layer = 15;
+                MeshRenderer meshRend = GetComponent<MeshRenderer>();
+                meshRend.material.color = Color.gray;
+                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, -2, 0);
+            }
+
         }
     }
 }
