@@ -32,19 +32,19 @@ public class Group : MonoBehaviour
         //make left of the alien group
         for (int i = 0; i < 4; i++) {
             //first row left
-            GameObject alien1 = Instantiate(Alien1, new Vector3(i*5-20, 0, 12+level), Quaternion.identity);
+            GameObject alien1 = Instantiate(Alien1, new Vector3(i*5-20, 12 + level, 0), Quaternion.identity);
             alien1.name = "Alien1_" + "1" + i;
             //second row left
-            GameObject alien2 = Instantiate(Alien1, new Vector3(i * 5 - 20, 0, 16 + level), Quaternion.identity);
+            GameObject alien2 = Instantiate(Alien1, new Vector3(i * 5 - 20, 16 + level, 0), Quaternion.identity);
             alien2.name = "Alien1_" + "2" + i;
             //3rd row left
-            GameObject alien3 = Instantiate(Alien2, new Vector3(i * 5 - 20, 0, 20 + level), Quaternion.identity);
+            GameObject alien3 = Instantiate(Alien2, new Vector3(i * 5 - 20, 20 + level, 0), Quaternion.identity);
             alien3.name = "Alien2_" + "1" + i;
             //4th row left
-            GameObject alien4 = Instantiate(Alien2, new Vector3(i * 5 - 20, 0, 24 + level), Quaternion.identity);
+            GameObject alien4 = Instantiate(Alien2, new Vector3(i * 5 - 20, 24 + level, 0), Quaternion.identity);
             alien4.name = "Alien2_" + "2" + i;
             //5th row left
-            GameObject alien5 = Instantiate(Alien3, new Vector3(i * 5 - 20, 0, 28 + level), Quaternion.identity);
+            GameObject alien5 = Instantiate(Alien3, new Vector3(i * 5 - 20, 28 + level, 0 ), Quaternion.identity);
             alien5.name = "Alien3_" + "1" + i;
             list.Add(alien1);
             list.Add(alien2);
@@ -57,19 +57,19 @@ public class Group : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             //first row right
-            GameObject alien1 = Instantiate(Alien1, new Vector3(i * 5, 0, 12 + level), Quaternion.identity);
+            GameObject alien1 = Instantiate(Alien1, new Vector3(i * 5, 12 + level,0), Quaternion.identity);
             alien1.name = "Alien1_" + "1" + i + 5;
             //second row right
-            GameObject alien2 = Instantiate(Alien1, new Vector3(i * 5, 0, 16 + level), Quaternion.identity);
+            GameObject alien2 = Instantiate(Alien1, new Vector3(i * 5, 16 + level, 0), Quaternion.identity);
             alien2.name = "Alien1_" + "1" + i + 5;
             //3rd row left
-            GameObject alien3 = Instantiate(Alien2, new Vector3(i * 5, 0, 20 + level), Quaternion.identity);
+            GameObject alien3 = Instantiate(Alien2, new Vector3(i * 5, 20 + level,0 ), Quaternion.identity);
             alien3.name = "Alien1_" + "1" + i + 5;
             //4th row left
-            GameObject alien4 = Instantiate(Alien2, new Vector3(i * 5, 0, 24 + level), Quaternion.identity);
+            GameObject alien4 = Instantiate(Alien2, new Vector3(i * 5, 24 + level, 0), Quaternion.identity);
             alien4.name = "Alien1_" + "1" + i + 5;
             //5th row left
-            GameObject alien5 = Instantiate(Alien3, new Vector3(i * 5, 0, 28 + level), Quaternion.identity);
+            GameObject alien5 = Instantiate(Alien3, new Vector3(i * 5, 28 + level, 0), Quaternion.identity);
             alien5.name = "Alien1_" + "1" + i + 5;
             list.Add(alien1);
             list.Add(alien2);

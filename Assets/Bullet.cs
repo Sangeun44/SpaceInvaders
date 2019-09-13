@@ -13,37 +13,36 @@ public class Bullet : MonoBehaviour
     {
 		GameObject g = GameObject.Find("GlobalObject");
 		globalObj = g.GetComponent<Global>();
-
+        MeshRenderer meshRend = GetComponent<MeshRenderer>();
+        meshRend.material.color = Color.red;
         alive = true;
 		// travel straight in the z-axis
-		thrust.z = 1000.0f;
+		thrust.y = 500.0f;
         // do not passively decelerate
         GetComponent<Rigidbody>().drag = 0;
-        // apply thrust once, no need to apply it again since
-        // it will not decelerate
+        // apply thrust once, no need to apply it again since it will not decelerate
         GetComponent<Rigidbody>().AddRelativeForce(thrust);
     }
 
     // Update is called once per frame
     void Update()
-    { //Physics engine handles movement, empty for now. }
+    {
 
     }
 
     public AudioClip deathExplosion;
-    private void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
-        // Change the cube color to green.
-        //MeshRenderer meshRend = GetComponent<MeshRenderer>();
-        //meshRend.material.color = Color.green;
-        //Debug.Log(other.name);
-        if (other.gameObject.tag == "Attack")
-        {
-            alive = false;
-            //AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-            //Destroy(other.gameObject); //delete bullet
-            //Destroy(gameObject); //delete the bullet
+        if (alive) {
+            if (collision.collider.gameObject.tag == "Alien1" || collision.collider.gameObject.tag == "Alien2" || collision.collider.gameObject.tag == "Alien3")
+            {
+                alive = false;
+                MeshRenderer meshRend = GetComponent<MeshRenderer>();
+                meshRend.material.color = Color.gray;
+                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, -2, 0);
+            }
         }
     }
-
 }

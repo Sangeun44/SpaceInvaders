@@ -15,16 +15,7 @@ public class Laser : MonoBehaviour
         alive = true;
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            Debug.DrawRay(contact.point, contact.normal, Color.white);
-        }
-        if (collision.relativeVelocity.magnitude > 2)
-            audioSource.Play();
-    }
-
+    
     public AudioClip deathExplosion;
     public GameObject explosion;
     private void OnTriggerEnter(Collider other)
@@ -42,6 +33,8 @@ public class Laser : MonoBehaviour
             Die();
         }
     }
+
+
 
     public AudioClip pewpew;
     float speed = 15.0f;
@@ -70,7 +63,7 @@ public class Laser : MonoBehaviour
             //Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
             //Debug.Log("Fire!");
             Vector3 spawnPos = gameObject.transform.position;
-            spawnPos.z += 2.5f;
+            spawnPos.y += 2.5f;
             // instantiate the Bullet
             GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
             // get the Bullet Script Component of the new Bullet instance
@@ -87,9 +80,30 @@ public class Laser : MonoBehaviour
         Global g = obj.GetComponent<Global>();
         g.livesRemaining -= 1;
         g.playerDied = true;
-        alive = true;
-        //Destroy(gameObject);
+        alive = false;
+        Destroy(gameObject);
         Debug.Log("died");
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Alien1 collision");
+
+        if (collision.collider.gameObject.tag == "Attack" && alive)
+        {
+            if (collision.collider.gameObject.GetComponent<Attack>().alive)
+            {
+                Die();
+                AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
+
+                MeshRenderer meshRend = GetComponent<MeshRenderer>();
+                meshRend.material.color = Color.red;
+
+                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -50);
+            }           
+        }
     }
 
 }

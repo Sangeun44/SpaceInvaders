@@ -5,35 +5,63 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     public Vector3 thrust;
+    public bool alive;
     // Use this for initialization
+
     void Start()
     {
+        alive = true;
         // travel straight in the z-axis
-        thrust.z = -400.0f;
+        thrust.y = -700.0f;
         // do not passively decelerate
+        MeshRenderer meshRend = GetComponent<MeshRenderer>();
+        meshRend.material.color = Color.green;
         GetComponent<Rigidbody>().drag = 0;
         // apply thrust once, no need to apply it again since
         // it will not decelerate
         GetComponent<Rigidbody>().AddRelativeForce(thrust);
+
     }
 
     // Update is called once per frame
     void Update()
-    { //Physics engine handles movement, empty for now. }
-
+    { 
 
     }
 
-    //public AudioClip deathExplosion
-    private void OnTriggerEnter(Collider other)
-    {
-        // Change the cube color to green.
 
-        if (other.gameObject.tag == "Bullet")
+    //public AudioClip deathExplosion
+    public AudioClip deathExplosion;
+    void OnCollisionEnter(Collision collision)
+    {
+        if(alive)
         {
-            //AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-            Destroy(other.gameObject); //delete bullet
-            Destroy(gameObject); //delete this alien
+            if (collision.collider.gameObject.tag == "Bullet")
+            {
+
+                alive = false;
+                MeshRenderer meshRend = GetComponent<MeshRenderer>();
+                meshRend.material.color = Color.gray;
+                AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
+                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, -2, 0);
+            }
+
+            if(collision.collider.gameObject.tag == "Laser")
+            {
+
+                alive = false;
+                MeshRenderer meshRend = GetComponent<MeshRenderer>();
+                meshRend.material.color = Color.gray;
+                AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
+                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, -2, 0);
+                Destroy(collision.collider.gameObject);
+            }
+
         }
+
     }
 }

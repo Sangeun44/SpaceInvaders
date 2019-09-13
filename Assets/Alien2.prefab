@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9086852366237816734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.40999997}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 885273259156702345}
@@ -89,7 +89,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9086852366237816734}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -108,7 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointValue: 0
   direction: 0
-  bullet: {fileID: 4093398696652912029, guid: 23bab4dca07284803a58d625ba1078cf, type: 3}
+  bullet: {fileID: 5445097447513633072, guid: 23bab4dca07284803a58d625ba1078cf, type: 3}
+  alive: 0
   deathExplosion: {fileID: 8300000, guid: a71c11b51e4664b3c89cb868f62982b0, type: 3}
 --- !u!54 &3590562996167801960
 Rigidbody:
@@ -124,7 +125,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 72
   m_CollisionDetection: 0
 --- !u!1001 &5274748258922114963
 PrefabInstance:

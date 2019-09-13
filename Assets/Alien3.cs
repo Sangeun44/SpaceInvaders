@@ -16,8 +16,11 @@ public class Alien3 : MonoBehaviour
     float leftEnd;
     float num_aliens;
 
+    public bool alive;
+
     void Start()
     {
+        alive = true;
         GameObject obj = GameObject.Find("GlobalObject");
         g = obj.GetComponent<Global>();
         GameObject gp = g.Group;
@@ -27,59 +30,76 @@ public class Alien3 : MonoBehaviour
         direction = 1;
         rightEnd = 8;
         leftEnd = -10;
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        num_aliens = grw.list.Count;
-        //Debug.Log("all aliens: " + num_aliens);
-
-        //Physics engine handles movement, empty for now. }
-        float step = speed * 40 / num_aliens * Time.deltaTime * direction; //slow it down
-        rightEnd += step;
-        leftEnd += step;
-
-        transform.Translate(step, 0, 0);
-
-        //limit movement left to right
-        if (leftEnd <= -15.0f)
+        if (alive)
         {
-            direction = 1;
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1.0f);
-        }
-        else if (rightEnd >= 15.0f)
-        {
-            direction = -1;
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1.0f);
+            num_aliens = grw.list.Count;
+
+            float step = speed * 40 / num_aliens * Time.deltaTime * direction; //slow it down
+            rightEnd += step;
+            leftEnd += step;
+
+            transform.Translate(step, 0, 0);
+
+            //limit movement left to right
+            if (leftEnd <= -15.0f)
+            {
+                direction = 1;
+                transform.position = new Vector3(transform.position.x, transform.position.y - 1.0f, transform.position.z);
+            }
+            else if (rightEnd >= 15.0f)
+            {
+                direction = -1;
+                transform.position = new Vector3(transform.position.x, transform.position.y - 1.0f, transform.position.z);
+            }
+
+            int ran = Random.Range(0, 10000);
+
+            if (ran >= 9997 && g.livesRemaining > 0)
+            {
+                Vector3 spawnPos = gameObject.transform.position;
+                spawnPos.y -= 2.5f;
+                // instantiate the Bullet
+                GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
+                // get the Bullet Script Component of the new Bullet instance
+            }
         }
 
-        int ran = Random.Range(0, 10000);
-
-        if (ran >= 9997 && g.livesRemaining > 0)
-        {
-            Vector3 spawnPos = gameObject.transform.position;
-            spawnPos.z += 2.5f;
-            // instantiate the Bullet
-            GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
-            // get the Bullet Script Component of the new Bullet instance
-        }
 
     }
 
     public AudioClip deathExplosion;
 
-    private void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
-        // Change the cube color to green.
-        //MeshRenderer meshRend = GetComponent<MeshRenderer>();
-        //meshRend.material.color = Color.green;
-        if (other.gameObject.tag == "Bullet")
+        Debug.Log("Alien3 collision");
+        if (collision.collider.gameObject.tag == "Attack")
         {
-            AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-            Destroy(other.gameObject); //delete bullet
-            Die();
+            Debug.Log("attack and alien collision 3");
+            Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<Collider>());
         }
+        if (collision.collider.gameObject.tag == "Bullet" && alive)
+        {   //collision with bullet
+            //make sure alien dies
+
+            Die();
+            AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
+
+            MeshRenderer meshRend = GetComponent<MeshRenderer>();
+            meshRend.material.color = Color.red;
+
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -5000);
+        }
+
+
     }
 
     //public GameObject deathExplosion;
@@ -91,11 +111,9 @@ public class Alien3 : MonoBehaviour
         GameObject obj = GameObject.Find("GlobalObject");
         g = obj.GetComponent<Global>();
         g.score += pointValue;
-
+        alive = false;
         int index = grw.list.IndexOf(gameObject);
-        Destroy(gameObject);
         Debug.Log("Alien3: " + index);
         grw.list.RemoveAt(index);
-        //grw.list.Remove(gameObject);
     }
 }

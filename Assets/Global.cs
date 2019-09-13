@@ -29,7 +29,7 @@ public class Global : MonoBehaviour
         livesRemaining = 3;
         score = 0;
         direction = -1;
-        Instantiate(Laser, new Vector3(0, 0, -20), Quaternion.identity);
+        Instantiate(Laser, new Vector3(0, -20, 0), Quaternion.identity);
         Group = Instantiate(Group);
         playerWon = false;
         playerDied = false;
@@ -42,7 +42,7 @@ public class Global : MonoBehaviour
         livesRemaining++;
         score = 0;
         direction = -1;
-        Instantiate(Laser, new Vector3(0, 0, -20), Quaternion.identity);
+        Instantiate(Laser, new Vector3(0, -20, 0), Quaternion.identity);
         Group = Instantiate(Group);
         playerWon = false;
         playerDied = false;
@@ -70,7 +70,7 @@ public class Global : MonoBehaviour
         int ran = Random.Range(0, 10000);
         if (ran >= 9990 && livesRemaining > 0 && !playerWon)
         {
-            Instantiate(AlienShip, new Vector3(40 * direction*-1, 0, 35), Quaternion.identity);
+            Instantiate(AlienShip, new Vector3(40 * direction*-1, 35, 0), Quaternion.identity);
         }
 
         if (playerDied && livesRemaining > 0)

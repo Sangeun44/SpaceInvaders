@@ -30,68 +30,77 @@ public class Alien1 : MonoBehaviour
         direction = 1;
         rightEnd = 8;
         leftEnd = -10;
+
+        Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<Collider>());
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        num_aliens = grw.list.Count;
-        //Debug.Log("all aliens: " + num_aliens);
+        if (alive) {
+            num_aliens = grw.list.Count;
 
-        float step = speed *40/num_aliens * Time.deltaTime * direction; //slow it down
-        rightEnd += step;
-        leftEnd += step;
+            float step = speed * 40 / num_aliens * Time.deltaTime * direction; //slow it down
+            rightEnd += step;
+            leftEnd += step;
 
-        transform.Translate(step, 0, 0);
+            transform.Translate(step, 0, 0);
 
-        //limit movement left to right
-        if (leftEnd <= -15.0f)
-        {
-            direction = 1;
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1.0f);
-        }
-        else if (rightEnd >= 15.0f)
-        {
-            direction = -1;
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1.0f);
-        }
+            //limit movement left to right
+            if (leftEnd <= -15.0f)
+            {
+                direction = 1;
+                transform.position = new Vector3(transform.position.x, transform.position.y - 1.0f, transform.position.z);
+            }
+            else if (rightEnd >= 15.0f)
+            {
+                direction = -1;
+                transform.position = new Vector3(transform.position.x, transform.position.y - 1.0f, transform.position.z);
+            }
 
-        int ran = Random.Range(0, 10000);
+            int ran = Random.Range(0, 10000);
 
-        if (ran >= 9997 && g.livesRemaining > 0) {
-            Vector3 spawnPos = gameObject.transform.position;
-            spawnPos.z += 2.5f;
-            // instantiate the Bullet
-            GameObject obj = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
-            // get the Bullet Script Component of the new Bullet instance
-        }
-       
+            if (ran >= 9997 && g.livesRemaining > 0)
+            {
+                Vector3 spawnPos = gameObject.transform.position;
+                spawnPos.y -= 2.5f;
+                // instantiate the Bullet
+                GameObject attack = Instantiate(bullet, spawnPos, Quaternion.identity) as GameObject;
+            }
+        }       
     }
 
     public AudioClip deathExplosion;
-    private void OnTriggerEnter(Collider other)
-    {
-        // Change the cube color to green.
-        //MeshRenderer meshRend = GetComponent<MeshRenderer>();
-        //meshRend.material.color = Color.green;
-        if (other.gameObject.tag == "Bullet")
-        {
-            AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-            //Destroy(other.gameObject); //delete bullet
-            if (alive)
-            {
-                Die();
-            }
-        }
-    }
-
     void OnCollisionEnter(Collision collision)
     {
-        ContactPoint contact = collision.contacts[0];
-        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-        Vector3 pos = contact.point;
-        //Instantiate(explosionPrefab, pos, rot);
-        //Destroy(gameObject);
+        Debug.Log("Alien1 collision");
+        if (collision.collider.gameObject.tag == "Attack")
+        {
+            Debug.Log("attack and alien collision 1");
+            Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<Collider>());
+        }
+
+        if (alive) {
+        
+            if (collision.collider.gameObject.tag == "Bullet")
+            {
+                //collision with bullet
+                //make sure alien dies            
+                Die();
+                AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
+
+                MeshRenderer meshRend = GetComponent<MeshRenderer>();
+                meshRend.material.color = Color.red;
+
+                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -500);
+            }
+ 
+        }
+
+
     }
 
     public void Die()
