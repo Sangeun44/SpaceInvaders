@@ -30,6 +30,7 @@ public class Alien2 : MonoBehaviour
         rightEnd = 8;
         leftEnd = -10;
         alive = true;
+        Physics.IgnoreLayerCollision(9, 8);
 
 
     }
@@ -77,25 +78,26 @@ public class Alien2 : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Alien2 collision");
-        if (collision.collider.gameObject.tag == "Attack")
+        //Debug.Log("Alien2 collision");
+
+        if (alive)
         {
-            Debug.Log("attack and alien collision 2");
-            Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<Collider>());
-        }
-        if (collision.collider.gameObject.tag == "Bullet" && alive)
-        {   //collision with bullet
-            //make sure alien dies
+            if (collision.collider.gameObject.tag == "Bullet")
+            {
+                Die();
+                AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
 
-            Die();
-            AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
+                MeshRenderer meshRend = GetComponent<MeshRenderer>();
+                meshRend.material.color = Color.red;
 
-            MeshRenderer meshRend = GetComponent<MeshRenderer>();
-            meshRend.material.color = Color.red;
+                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -500);
+                if (collision.collider.gameObject.GetComponent<Bullet>().alive)
+                {
 
-            this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-            this.gameObject.GetComponent<Rigidbody>().useGravity = true;
-            this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -5000);
+                }
+            }
         }
 
 
@@ -112,7 +114,7 @@ public class Alien2 : MonoBehaviour
         g.score += pointValue;
         alive = false;
         int index = grw.list.IndexOf(gameObject);
-        Debug.Log("Alien2: " + index);
+        //Debug.Log("Alien2: " + index);
         grw.list.RemoveAt(index);
     }
 }

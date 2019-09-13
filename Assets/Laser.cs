@@ -13,28 +13,8 @@ public class Laser : MonoBehaviour
     void Start()
     {
         alive = true;
+        Physics.IgnoreLayerCollision(10, 11);
     }
-
-    
-    public AudioClip deathExplosion;
-    public GameObject explosion;
-    private void OnTriggerEnter(Collider other)
-    {
-        // Change the cube color to green.
-        //MeshRenderer meshRend = GetComponent<MeshRenderer>();
-        //meshRend.material.color = Color.green;
-        //Debug.Log(other.name);
-        if (other.gameObject.tag == "Attack")
-        {
-            //Debug.Log("The enemy attack reached me");
-            AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-            Instantiate(explosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
-            Destroy(other.gameObject); //delete this bullet
-            Die();
-        }
-    }
-
-
 
     public AudioClip pewpew;
     float speed = 15.0f;
@@ -54,7 +34,7 @@ public class Laser : MonoBehaviour
             transform.position = new Vector3(25.0f, transform.position.y, transform.position.z);
         }
 
-        Debug.Log("comeback");
+        //Debug.Log("comeback");
 
         //press space to shoot bullet
         if (Input.GetKeyDown("space"))
@@ -72,10 +52,13 @@ public class Laser : MonoBehaviour
         }
     }
 
+    public AudioClip deathExplosion;
+    public GameObject explosion;
     public void Die()
     {
-        //AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
-        //Instantiate(deathExplosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
+        AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
+        Debug.Log("explode");
+        Instantiate(explosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
         GameObject obj = GameObject.Find("GlobalObject");
         Global g = obj.GetComponent<Global>();
         g.livesRemaining -= 1;
@@ -87,23 +70,29 @@ public class Laser : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Alien1 collision");
+        //Debug.Log("Alien1 collision");
 
-        if (collision.collider.gameObject.tag == "Attack" && alive)
+        if (alive)
         {
-            if (collision.collider.gameObject.GetComponent<Attack>().alive)
+            if (collision.collider.gameObject.tag == "Attack")
             {
-                Die();
-                AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
+                if (collision.collider.gameObject.GetComponent<Attack>().alive)
+                {
+                    Die();
+                    //AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
+                    //Instantiate(explosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
 
-                MeshRenderer meshRend = GetComponent<MeshRenderer>();
-                meshRend.material.color = Color.red;
-
-                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -50);
-            }           
+                    this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                    this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                    this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -50);
+                }
+                else {
+                    Debug.Log("alive");
+                }
+               
+            }
         }
+       
     }
 
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2041731158011212519}
   - component: {fileID: 8138579672648214123}
   - component: {fileID: 4341692101777404807}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UFO_cockpit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 1585640013127964400}
   - component: {fileID: 1118444662253827054}
   - component: {fileID: 8028348316405594968}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AlienShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1266420664385214059}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Low_poly_UFO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 7744925510036036083}
   - component: {fileID: 3385212943568895906}
   - component: {fileID: 6227832506488805776}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UFO_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

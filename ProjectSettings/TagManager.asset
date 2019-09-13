@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - Attack
   - Laser
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -19,8 +20,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Aliens
+  - Attack
   - 
   - 
   - 

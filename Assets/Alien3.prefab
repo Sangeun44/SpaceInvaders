@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5013163708848590888}
   - component: {fileID: 3634528485563008374}
   - component: {fileID: 592590364640819941}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Alien3
   m_TagString: Alien3
   m_Icon: {fileID: 0}
@@ -138,6 +138,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Decoration 08 Sea Urchin
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5d85e7b82be9c4d6ebe84cdbd6c87f52,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5d85e7b82be9c4d6ebe84cdbd6c87f52,
         type: 3}

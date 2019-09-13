@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1686903999180571965}
   - component: {fileID: 3660787436565917424}
   - component: {fileID: 3590562996167801960}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Alien2
   m_TagString: Alien2
   m_Icon: {fileID: 0}
@@ -138,6 +138,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bumble_ball
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a8c8d65237d624fffb92ed701881ba68,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2534866581884222612, guid: a8c8d65237d624fffb92ed701881ba68,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a8c8d65237d624fffb92ed701881ba68,
         type: 3}

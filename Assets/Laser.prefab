@@ -108,10 +108,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 5599000965231349790, guid: fd572d510f28f4c61af03df0b9530a88, type: 3}
   alive: 0
+  pewpew: {fileID: 8300000, guid: 0c735b473942b430db45d2a0f5b46fec, type: 3}
   deathExplosion: {fileID: 8300000, guid: a71c11b51e4664b3c89cb868f62982b0, type: 3}
   explosion: {fileID: 6804406926860437613, guid: f8a1e9b4038c1456ea1b78094ee43b75,
     type: 3}
-  pewpew: {fileID: 8300000, guid: 0c735b473942b430db45d2a0f5b46fec, type: 3}
 --- !u!54 &495198755699583140
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -139,6 +139,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: vehicle_playerShip
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 9baa18479bba644458248d04482bd987,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 9baa18479bba644458248d04482bd987,
         type: 3}

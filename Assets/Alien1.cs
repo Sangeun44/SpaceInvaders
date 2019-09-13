@@ -31,7 +31,7 @@ public class Alien1 : MonoBehaviour
         rightEnd = 8;
         leftEnd = -10;
 
-        Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<Collider>());
+        Physics.IgnoreLayerCollision(9, 8);
 
     }
 
@@ -75,31 +75,17 @@ public class Alien1 : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Alien1 collision");
-        if (collision.collider.gameObject.tag == "Attack")
+        if (alive)
         {
-            Debug.Log("attack and alien collision 1");
-            Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<Collider>());
-        }
-
-        if (alive) {
-        
             if (collision.collider.gameObject.tag == "Bullet")
             {
-                //collision with bullet
-                //make sure alien dies            
-                Die();
-                AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-
-                MeshRenderer meshRend = GetComponent<MeshRenderer>();
-                meshRend.material.color = Color.red;
-
                 this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 this.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -500);
+                Die();
+                    AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
+                    this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -500);                
             }
- 
         }
-
 
     }
 
@@ -112,7 +98,7 @@ public class Alien1 : MonoBehaviour
         g.score += pointValue;
         alive = false;
         int index = grw.list.IndexOf(gameObject);
-        Debug.Log("Alien1: " + index);
+        //Debug.Log("Alien1: " + index);
         grw.list.RemoveAt(index);
     }
 }

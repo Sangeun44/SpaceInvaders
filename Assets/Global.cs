@@ -117,7 +117,7 @@ public class Global : MonoBehaviour
     IEnumerator Respawn(float Count)
     {
         yield return new WaitForSeconds(Count); //Count is the amount of time in seconds that you want to wait.
-        Instantiate(Laser, new Vector3(0, 0, -20), Quaternion.identity);
+        Instantiate(Laser, new Vector3(0, -20, 0), Quaternion.identity);
         //And here goes your method of resetting the game...
         yield return null;
     }

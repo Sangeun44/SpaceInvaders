@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7323609492480697283}
   - component: {fileID: 9017084137579155402}
   - component: {fileID: 8520507708542744298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Alien1
   m_TagString: Alien1
   m_Icon: {fileID: 0}
@@ -138,6 +138,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Decorative_Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 16a6b3aa25765476e890fd2dbc20e15c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 16a6b3aa25765476e890fd2dbc20e15c,
         type: 3}

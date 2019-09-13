@@ -34,33 +34,36 @@ public class Attack : MonoBehaviour
     public AudioClip deathExplosion;
     void OnCollisionEnter(Collision collision)
     {
+
         if(alive)
         {
+            alive = false;
+            this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, -100, 0);
+
             if (collision.collider.gameObject.tag == "Bullet")
             {
-
-                alive = false;
+                gameObject.layer = 10;
                 MeshRenderer meshRend = GetComponent<MeshRenderer>();
                 meshRend.material.color = Color.gray;
-                AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, -2, 0);
             }
 
             if(collision.collider.gameObject.tag == "Laser")
             {
-
-                alive = false;
+                gameObject.layer = 10;
                 MeshRenderer meshRend = GetComponent<MeshRenderer>();
                 meshRend.material.color = Color.gray;
                 AudioSource.PlayClipAtPoint(deathExplosion, gameObject.transform.position);
-                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, -2, 0);
-                Destroy(collision.collider.gameObject);
+                collision.collider.gameObject.GetComponent<Laser>().Die();
             }
 
+            if (collision.collider.gameObject.tag == "Floor")
+            {
+                gameObject.layer = 10;
+                MeshRenderer meshRend = GetComponent<MeshRenderer>();
+                meshRend.material.color = Color.gray;
+            }
         }
 
     }
