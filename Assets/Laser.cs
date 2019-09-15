@@ -25,13 +25,13 @@ public class Laser : MonoBehaviour
         transform.Translate(Input.GetAxis("Horizontal") * step, 0, 0);
 
         //limit movement left to right
-        if (transform.position.x <= -25.0f)
+        if (transform.position.x <= -30.0f)
         {
-            transform.position = new Vector3(-25.0f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(-30.0f, transform.position.y, transform.position.z);
         }
-        else if (transform.position.x >= 25.0f)
+        else if (transform.position.x >= 30.0f)
         {
-            transform.position = new Vector3(25.0f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(30.0f, transform.position.y, transform.position.z);
         }
 
         //Debug.Log("comeback");

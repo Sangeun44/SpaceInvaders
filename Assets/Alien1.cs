@@ -46,6 +46,12 @@ public class Alien1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.y < -15 && this.gameObject.layer != 14)
+        {
+            Debug.Log("Alien1 reached end");
+            g.gameOver = true;
+        }
+
         if (alive) {
             num_aliens = grw.list.Count;
 

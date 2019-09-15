@@ -20,6 +20,9 @@ public class AlienShip : MonoBehaviour
         int ran = Random.Range(0, 2);
         direction = globalObj.direction;
         pointValue = points[ran];
+
+        Physics.IgnoreLayerCollision(9, 8);
+
     }
 
     // Update is called once per frame

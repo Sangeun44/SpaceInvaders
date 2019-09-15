@@ -49,6 +49,11 @@ public class Alien3 : MonoBehaviour
     {
         if (alive)
         {
+            if (transform.position.y < -15 && this.gameObject.layer != 14)
+            {
+                Debug.Log("Alien1 reached end");
+                g.gameOver = true;
+            }
             num_aliens = grw.list.Count;
 
             float step = speed * 40 / num_aliens * Time.deltaTime * direction; //slow it down

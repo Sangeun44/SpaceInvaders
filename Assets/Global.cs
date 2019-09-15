@@ -108,6 +108,11 @@ public class Global : MonoBehaviour
             StartCoroutine("LevelCleared", 3.0f); //respawn
             restart = false;
         }
+        if (gameOver) {
+            livesRemaining = 0;
+            GameObject player = GameObject.Find("Laser(Clone)");
+            Destroy(player);
+        }
     }
 
     IEnumerator LevelCleared(float Count)
