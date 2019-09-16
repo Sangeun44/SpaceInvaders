@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (alive) {
-            if (collision.collider.gameObject.tag == "Alien1" || collision.collider.gameObject.tag == "Alien2" || collision.collider.gameObject.tag == "Alien3")
+            if (collision.collider.gameObject.tag == "Alien1" || collision.collider.gameObject.tag == "Alien2" || collision.collider.gameObject.tag == "Alien3" || collision.collider.gameObject.tag == "AlienShip")
             {
                 alive = false;
                 gameObject.layer = 15;

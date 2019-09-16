@@ -27,6 +27,7 @@ public class AlienShip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         float step = speed * Time.deltaTime * direction; //slow it down
         //Debug.Log(step);
         this.transform.Translate(step, 0, 0);

@@ -69,7 +69,7 @@ public class Global : MonoBehaviour
 
         // make alien ships that will move at the back row
         int ran = Random.Range(0, 10000);
-        if (ran >= 9990 && livesRemaining > 0 && !playerWon)
+        if (ran >= 9990 && livesRemaining > 0 && !playerWon && !GameObject.Find("AlienShip(Clone)"))
         {
             Instantiate(AlienShip, new Vector3(40 * direction*-1, 35, 0), Quaternion.identity);
         }
