@@ -22,7 +22,6 @@ public class AlienShip : MonoBehaviour
         pointValue = points[ran];
 
         Physics.IgnoreLayerCollision(9, 8);
-
     }
 
     // Update is called once per frame
